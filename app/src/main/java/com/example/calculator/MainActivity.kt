@@ -1,34 +1,24 @@
 package com.example.calculator
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
-import java.lang.Exception
 
-class MainActivity : AppCompatActivity() {
-        var can = false
+
+open class MainActivity : AppCompatActivity() {
+    private var can = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tv1.setOnClickListener{addOnExpression("1",true)}
-        tv2.setOnClickListener{addOnExpression("2",true)}
-        tv3.setOnClickListener{addOnExpression("3",true)}
-        tv4.setOnClickListener{addOnExpression("4",true)}
-        tv5.setOnClickListener{addOnExpression("5",true)}
-        tv6.setOnClickListener{addOnExpression("6",true)}
-        tv7.setOnClickListener{addOnExpression("7",true)}
-        tv8.setOnClickListener{addOnExpression("8",true)}
-        tv9.setOnClickListener{addOnExpression("9",true)}
-        tv0.setOnClickListener{addOnExpression("0",true)}
-        tvDot.setOnClickListener{addOnExpression(".",true)}
+        val buttons = mutableListOf(tv1, tv2, tv3, tv4, tv5, tv6,tv7, tv8, tv9, tvDot)
+        val button = mutableListOf(tvPlus, tvMinus, tvMultiply, tvShare)
 
+        buttons.forEach { btn -> btn.setOnClickListener{addOnExpression(btn.text.toString(),true)} }
 
-        tvPlus.setOnClickListener{addOnExpression("+",false)}
-        tvMinus.setOnClickListener{addOnExpression("-",false)}
-        tvMultiply.setOnClickListener{addOnExpression("*",false)}
-        tvShare.setOnClickListener{addOnExpression("/",false)}
+        button.forEach { btn -> btn.setOnClickListener{addOnExpression(btn.text.toString(),false)} }
 
         tvDel.setOnClickListener{
             tvExpression.text = ""
@@ -50,11 +40,22 @@ class MainActivity : AppCompatActivity() {
         catch (e:Exception){
         }
         }
-
-
     }
 
-    fun addOnExpression(append : String, clear : Boolean ){
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.run{
+            putString("KEY",tvExpression.text.toString())
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        tvExpression.text = savedInstanceState.getString("KEY")
+    }
+
+
+    private fun addOnExpression(append : String, clear : Boolean ){
         if(clear){
             tvResult.text = ""
             tvExpression.append(append)
