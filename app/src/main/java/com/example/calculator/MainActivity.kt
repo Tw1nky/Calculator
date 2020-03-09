@@ -45,13 +45,15 @@ open class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.run{
-            putString("KEY",tvExpression.text.toString())
+            putString("tvExpression",tvExpression.text.toString())
+            putString("tvResult",tvResult.text.toString())
         }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        tvExpression.text = savedInstanceState.getString("KEY")
+        tvExpression.text = savedInstanceState.getString("tvExpression")
+        tvResult.text = savedInstanceState.getString("tvResult")
     }
 
 
