@@ -13,7 +13,7 @@ open class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val buttons = mutableListOf(tv1, tv2, tv3, tv4, tv5, tv6,tv7, tv8, tv9, tvDot)
+        val buttons = mutableListOf(tv1, tv2, tv3, tv4, tv5, tv6,tv7, tv8, tv9, tvDot,tv0)
         val button = mutableListOf(tvPlus, tvMinus, tvMultiply, tvShare)
 
         buttons.forEach { btn -> btn.setOnClickListener{addOnExpression(btn.text.toString(),true)} }

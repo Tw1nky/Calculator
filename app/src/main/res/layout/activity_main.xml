@@ -121,7 +121,7 @@
             <TextView
                 android:id="@+id/tvShare"
                 style="@style/ActionButtonStyle"
-                android:text="%"/>
+                android:text="/"/>
             <TextView
                 android:id="@+id/tvMultiply"
                 style="@style/ActionButtonStyle"
